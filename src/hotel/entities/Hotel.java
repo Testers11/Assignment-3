@@ -84,17 +84,31 @@ public class Hotel {
 		return bookingsByConfirmationNumber.get(confirmationNumber);
 	}
 
-	
+	// implementation - Mohamed Nashath (20/09/2018)
 	public long book(Room room, Guest guest, 
 			Date arrivalDate, int stayLength, int occupantNumber,
 			CreditCard creditCard) {
-		// TODO Auto-generated method stub
-		return 0L;		
+		
+            Booking booking = room.book(guest, arrivalDate, stayLength, occupantNumber, creditCard);
+            long bookingConfirmationNumber = booking.getConfirmationNumber();
+            booking.doTimesConflict(arrivalDate, stayLength);
+            bookingsByConfirmationNumber.put(bookingConfirmationNumber, booking);
+                
+            return bookingConfirmationNumber;		
 	}
 
-	
+	// implementation - Mohamed Nashath (20/09/2018)
 	public void checkin(long confirmationNumber) {
-		// TODO Auto-generated method stub
+            
+            Booking booking = findBookingByConfirmationNumber(confirmationNumber);
+            if(booking != null){
+                int roomId = booking.getRoomId();
+                booking.checkIn();
+                activeBookingsByRoomId.put(roomId, booking);
+            }else{
+                throw new RuntimeException("Booking by this confirmation is not available.");
+            }
+            
 	}
 
 
