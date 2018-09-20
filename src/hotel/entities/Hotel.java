@@ -118,7 +118,7 @@ public class Hotel {
 
 	
 	public void checkout(int roomId) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 	}
 
 
