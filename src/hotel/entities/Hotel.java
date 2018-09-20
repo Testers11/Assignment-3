@@ -111,14 +111,30 @@ public class Hotel {
             
 	}
 
-
+        // implementation - Mohamed Nashath (20/09/2018)
 	public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
-		// TODO Auto-generated method stub
+		
+            Booking booking = findActiveBookingByRoomId(roomId); 
+            if(booking != null){
+                booking.addServiceCharge(serviceType, cost);
+            }else{
+                throw new RuntimeException("No any bookings for this roomId");
+                        
+            }
+            
 	}
 
-	
+	// implementation - Mohamed Nashath (20/09/2018)
 	public void checkout(int roomId) {
-		// TODO Auto-generated method stub
+		
+            Booking booking = findActiveBookingByRoomId(roomId);
+            if(booking != null){
+                booking.checkOut();
+                activeBookingsByRoomId.remove(roomId);
+            }else{
+                throw new RuntimeException("No any bookings for this roomId");
+                        
+            }
 	}
 
 
