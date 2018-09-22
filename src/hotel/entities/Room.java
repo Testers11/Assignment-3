@@ -60,8 +60,14 @@ public class Room {
 
 
 	public Booking book(Guest guest, Date arrivalDate, int stayLength, int numberOfOccupants, CreditCard creditCard) {
-		// TODO Auto-generated method stub
-		return null;		
+		// checking availability of booking
+		if (!isAvailable(arrivalDate, stayLength)) {
+			throw new RuntimeException("Booking is not available at the movement !");
+		}
+		// creating booking instance by making booking state "PENDING"
+		Booking booking = new Booking(guest, this, arrivalDate, stayLength, numberOfOccupants, creditCard);
+		this.bookings.add(booking);
+		return booking;		
 	}
 
 
