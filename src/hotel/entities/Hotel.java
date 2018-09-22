@@ -88,7 +88,7 @@ public class Hotel {
 
 	
 	/* implementation_hotel_class
-	 *  Hashini_Uttara(21/09/2018)
+	 * Hashini_Uttara (21/09/2018)
 	 */
 	 
 	public long book(Room room, Guest guest, 
