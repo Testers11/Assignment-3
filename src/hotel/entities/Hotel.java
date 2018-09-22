@@ -121,8 +121,19 @@ public class Hotel {
 	}
 
 
-	public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
-		// TODO Auto-generated method stub
+	/* implementation_hotel_class
+	 * Hashini_Uttara (21/09/2018)
+	 */
+	public void addServiceCharge(int roomNumber, ServiceType serviceType, double cost) {
+		
+            Booking bookingRoom = findActiveBookingByRoomId(roomNumber); 
+            if(bookingRoom != null){
+                bookingRoom.addServiceCharge(serviceType, cost);
+            }else{
+                throw new RuntimeException("No active booking is available for this roomId");
+                        
+            }
+            
 	}
 
 	
