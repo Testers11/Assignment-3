@@ -135,9 +135,23 @@ public class BookingCTL {
 		}
 	}
 
-
+        // Implementation - Mohamed Nashath (21/09/2018)        
 	public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
-		// TODO Auto-generated method stub
+		
+            if (state != State.CREDIT) {
+			String mesg = String.format("BookingCTL: creditDetailsEntered : bad state : %s", state);
+			throw new RuntimeException(mesg);
+		}
+            
+            CreditCard creditCard = new CreditCard(type, number, ccv);
+            CreditAuthorizer creditAuthorizer = new CreditAuthorizer();
+            boolean authorization = creditAuthorizer.authorize(creditCard, cost);
+            if(authorization){
+                long confirmationNumber = hotel.book(room, guest, arrivalDate, stayLength, occupantNumber, creditCard);
+                bookingUI.displayConfirmedBooking(room.getDescription(), room.getId(), arrivalDate, stayLength, guest.getName(), creditCard.getVendor(), number, cost, confirmationNumber);
+            }
+            
+            
 	}
 
 
