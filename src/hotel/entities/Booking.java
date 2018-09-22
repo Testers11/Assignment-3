@@ -131,7 +131,7 @@ public class Booking {
 		return Collections.unmodifiableList(charges);
 	}
 
-
+           // implemented code by chiguru
 	public void checkIn() {
 		// TODO Auto-generated method stub
 		
@@ -146,7 +146,7 @@ public class Booking {
 		}
 	}
 
-
+             // implemented code by chiguru
 	public void addServiceCharge(ServiceType serviceType, double cost) {
 		// TODO Auto-generated method stub
 		
@@ -160,7 +160,7 @@ public class Booking {
         }			 
 	}
 
-
+           // implemented code by chiguru
 	public void checkOut() {
 		// TODO Auto-generated method stub
 		
