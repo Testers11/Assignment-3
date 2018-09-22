@@ -82,16 +82,28 @@ public class Hotel {
 	
 	public Booking findBookingByConfirmationNumber(long confirmationNumber) {
 		return bookingsByConfirmationNumber.get(confirmationNumber);
+		
+
 	}
 
 	
+	/* implementation_hotel_class
+	 *  Hashini_Uttara(21/09/2018)
+	 */
+	 
 	public long book(Room room, Guest guest, 
 			Date arrivalDate, int stayLength, int occupantNumber,
 			CreditCard creditCard) {
-		// TODO Auto-generated method stub
-		return 0L;		
+		
+            Booking bookingRoom = room.book(guest, arrivalDate, stayLength, occupantNumber, creditCard);
+            long roomBookingConfirmationNumber = booking.getConfirmationNumber();
+            booking.doTimesConflict(arrivalDate, stayLength);
+            bookingsByConfirmationNumber.put(roomBookingConfirmationNumber, bookingRoom);
+                
+            return roomBookingConfirmationNumber;		
 	}
-
+	
+	
 	
 	public void checkin(long confirmationNumber) {
 		// TODO Auto-generated method stub
