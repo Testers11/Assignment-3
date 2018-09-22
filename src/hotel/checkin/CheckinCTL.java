@@ -79,8 +79,9 @@ public class CheckinCTL {
 	}
 
 	
+	// implemented code by chiguru
 	public void checkInConfirmed(boolean confirmed) {
-		// TODO Auto-generated method stub
+		
 		try {
 			if(confirmed) {
 				hotel.checkin(this.confirmationNumber);
