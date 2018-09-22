@@ -137,9 +137,19 @@ public class Hotel {
 	}
 
 	
-	public void checkout(int roomId) {
-		// TODO Auto-generated method stub
+	/* implementation_hotel_class
+	 * Hashini_Uttara (21/09/2018)
+	 */
+	public void checkout(int roomNumber) {
+		
+            Booking bookingRoom = findActiveBookingByRoomId(roomNumber);
+            if(bookingRoom != null){
+                bookingRoom.checkOut();
+                activeBookingsByRoomId.remove(roomNumber);
+            }else{
+                throw new RuntimeException("No active booking is available for this roomId");
+                        
+            }
 	}
-
 
 }
