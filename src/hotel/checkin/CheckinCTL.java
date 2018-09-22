@@ -82,19 +82,20 @@ public class CheckinCTL {
 	// implemented code by chiguru
 	public void checkInConfirmed(boolean confirmed) {
 		
-		try {
-			if(confirmed) {
-				hotel.checkin(this.confirmationNumber);
-				checkInUI.displayMessage("Checkin Confirmed for: " + this.confirmationNumber);
-				state = State.COMPLETED;
-				checkInUI.setState(CheckinUI.State.COMPLETED);
-			}
-			else {
-				checkInUI.displayMessage("Checkin Not Confirmed");
-				this.cancel();
-			}
+		if (this.state =! state.CONFIRMING) {
+			String mesg = String.format("CheckinCTL: checkInConfirmed: checkin is not Confirmed");
+			throw new RuntimeException(mesg);
 		}
-		catch(Exception e) {
+		if (this.state = state.CONFIRMING){
+			hotel.checkin();
+			checkInUI.displayMessage("Check has been confirmed");
+			state = state.COMPLETED;
+			checkInUI.state = checkInUI.state.COMPLETED;
+		}
+		else{
+			checkInUI.displayMessage("Check has been cancelled");
+			state = state.CANCELLED;
+			checkInUI.state = checkInUI.state.CANCELLED;
 			
 		}
 	}
