@@ -17,11 +17,13 @@ public class Room {
 	State state;
 
 	
-	public Room(int id, RoomType roomType) {
+                
+        public Room(int id,RoomType roomType, Booking bookings) {
+		
 		this.id = id;
 		this.roomType = roomType;
-		bookings = new ArrayList<>();
-		state = State.READY;
+		this.bookings = new ArrayList<>();
+                this.state = State.READY;
 	}
 	
 
@@ -60,18 +62,43 @@ public class Room {
 
 
 	public Booking book(Guest guest, Date arrivalDate, int stayLength, int numberOfOccupants, CreditCard creditCard) {
-		// TODO Auto-generated method stub
-		return null;		
+		// Validating availability of the booking
+		if (!isAvailable(arrivalDate, stayLength)) {
+			throw new RuntimeException("There is no Booking available !");
+		}
+                else
+                {
+		
+		Booking booking = new Booking(guest, this, arrivalDate, stayLength, numberOfOccupants, creditCard);
+		this.bookings.add(booking);
+		return booking;	
+                }
 	}
 
 
 	public void checkin() {
-		// TODO Auto-generated method stub
+		// Room Cheking Process
+		if (!isReady()) {
+			throw new RuntimeException("Room is not Ready");
+		}
+                else
+                {
+		this.state = State.OCCUPIED;
+                }
 	}
 
 
 	public void checkout(Booking booking) {
-		// TODO Auto-generated method stub
+		if (this.state != State.OCCUPIED)
+                {
+			throw new RuntimeException("Room is Occupied");
+                }
+		
+                else
+                {
+		this.bookings.remove(booking);
+		this.state = State.READY;
+                }
 	}
 
 
