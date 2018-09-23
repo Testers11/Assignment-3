@@ -1,3 +1,13 @@
+/**
+ * @author malinda
+ * ITC-515 professional programming practice
+ * hotel room implementation
+ * checking availability of booking
+ * creating booking instance
+ * handle the check-in for room booking
+ * removing the booking instance
+ */
+ 
 package hotel.entities;
 
 import java.util.ArrayList;
