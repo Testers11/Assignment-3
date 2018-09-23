@@ -1,3 +1,12 @@
+/**
+ * @author malinda
+ * ITC-515 professional programming practice
+ * hotel checkoutCTL implementation
+ * run time exception
+ * creating new credit card instance 
+ * and authorizing the credit card
+ */
+
 package hotel.checkout;
 
 import java.text.SimpleDateFormat;
@@ -98,7 +107,24 @@ public class CheckoutCTL {
 
 	
 	public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
-		// TODO Auto-generated method stub
+		// if controller states is not in CREDIT, system will throw a run time
+		// exception.
+		if (state != State.CREDIT) {
+			throw new RuntimeException("Controll state is not in CREDIT state !");
+		}
+
+		// creating new credit card instance and authorizing the credit card
+		CreditCard card = new CreditCard(type, number, ccv);
+		boolean isAutherized = CreditAuthorizer.getInstance().authorize(card, total);
+
+		if (isAutherized) {
+			this.hotel.checkout(roomId);
+			this.checkoutUI.displayMessage("Total amount AU" + total + " has been debited from your credit card");
+			this.state = State.COMPLETED;
+			this.checkoutUI.setState(CheckoutUI.State.COMPLETED);
+		} else {
+			this.checkoutUI.displayMessage("Credit card is not approved !");
+		}
 	}
 
 
